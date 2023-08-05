@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <EditText
+        android:id="@+id/search_bar"
+        android:layout_width="325dp"
+        android:layout_height="50dp"
+        android:hint="Search here ..."
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        />
+
+    <Button
+        android:id="@+id/search_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:textSize="20dp"
+        android:onClick="gotoMaps"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="120dp"
+        />
+
+    <TextView
+        android:id="@+id/emptymsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No places searched yet !"
+        android:textSize="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="80dp"
+        android:visibility="invisible"
+        />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerview"
+        android:layout_weight="1"
+        />
+
+
+
+
+</LinearLayout>
