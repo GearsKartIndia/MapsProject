@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewListe
         adapter.notifyItemInserted(items.size()-1);
         if (items.size()==0){
             textView.setVisibility(View.VISIBLE);
+            findViewById(R.id.delall).setVisibility(View.INVISIBLE);
         }
         else{
             textView.setVisibility(View.INVISIBLE);
@@ -75,5 +76,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewListe
         i.putExtra("location",place.split(",")[0]);
         startActivity(i);
         this.finish();
+    }
+
+    public void deleteAll(View view) {
+        DbHelper dbHelper = new DbHelper(MainActivity.this);
+        dbHelper.truncate();
+        this.recreate();
     }
 }

@@ -66,4 +66,10 @@ public class DbHelper  extends SQLiteOpenHelper {
         db.close();
         return allPlaces;
     }
+
+    public void truncate(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM PLACES");
+    }
+
 }

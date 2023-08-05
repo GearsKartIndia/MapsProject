@@ -47,6 +47,15 @@
         android:layout_weight="1"
         />
 
+    <Button
+        android:id="@+id/delall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DELETE ALL"
+        android:layout_marginLeft="120dp"
+        android:onClick="deleteAll"
+        />
+
 
 
 
