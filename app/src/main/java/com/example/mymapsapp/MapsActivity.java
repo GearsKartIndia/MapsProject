@@ -29,7 +29,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,GoogleMap.OnMapClickListener {
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
@@ -146,4 +146,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
+    @Override
+    public void onMapClick(@NonNull LatLng latLng1) {
+        Geocoder geocoder = new Geocoder(this,Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(latLng1.latitude,latLng1.longitude,1);
+            Address address11=addresses.get(0);
+            String location=address11.getLocality()+", "+address11.getAdminArea()+", "+address11.getCountryName();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("LOCATION")
+                    .setMessage("Do you want to save the location?\nName : "+location+"\nLatitude : "+latLng1.latitude+"\nLongitude : "+latLng1.longitude)
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        DbHelper dbHelper=new DbHelper(MapsActivity.this);
+                        dbHelper.insert(location,latLng1.latitude,latLng1.longitude);
+                    })
+                    .setNegativeButton("No", (dialog, which) -> dialog.cancel());
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

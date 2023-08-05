@@ -35,7 +35,7 @@ public class TheAdapter extends RecyclerView.Adapter<Viewholder>{
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                recyclerViewListener.onItemClick(items.get(position));
+                recyclerViewListener.onItemClick(items.get(holder.getAdapterPosition()));
             }
         });
     }
@@ -56,8 +56,10 @@ class Viewholder extends RecyclerView.ViewHolder{
         itemView.findViewById(R.id.delete).setOnClickListener(view -> {
             String remove = adapter.items.remove(getAdapterPosition());
             DbHelper dbHelper=new DbHelper(view.getContext());
-
-            dbHelper.delete(remove.split("\n")[0]);
+            int fcolon=remove.indexOf(":")+1;
+            int lcolon=remove.lastIndexOf(":")+1;
+            dbHelper.delete(Double.parseDouble(remove.substring(fcolon).split("\n")[0])
+                    ,Double.parseDouble(remove.substring(lcolon)));
             adapter.notifyItemRemoved(getAdapterPosition());
 
         });

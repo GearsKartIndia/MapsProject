@@ -40,9 +40,9 @@ public class DbHelper  extends SQLiteOpenHelper {
         return flag != -1;
     }
 
-    public void delete(String place){
+    public void delete(double latitude, double longitude){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete("PLACES","PLACE = '"+place+"'",null);
+        db.delete("PLACES","LATITUDE = "+latitude +" AND LONGITUDE = " + longitude ,null);
     }
 
     public List<Location1> selectAll(){
